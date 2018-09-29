@@ -18,5 +18,17 @@ RUN $ANDROID_HOME/tools/bin/sdkmanager \
     "platforms;android-28" \
     "platform-tools"
 
+RUN $ANDROID_HOME/tools/bin/sdkmanager \ 
+    "system-images;android-19;google_apis;armeabi-v7a"
+
+RUN $ANDROID_HOME/tools/bin/sdkmanager \ 
+    "emulator"
+
+RUN echo no | \
+    $ANDROID_HOME/tools/bin/avdmanager \
+    create avd \
+    -n test-avd \
+    -k "system-images;android-19;google_apis;armeabi-v7a"
+
 RUN mkdir /app_workdir
 WORKDIR /app_workdir
